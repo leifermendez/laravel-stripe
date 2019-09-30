@@ -1,0 +1,19 @@
+{
+    "name": "leifermendez/laravel-stripe",
+    "description": "Paquete para laravel el cual ya incorpora el sistema SCA regulación Europea 14 septiembre",
+    "authors": [
+        {
+            "name": "Leifer Mendez",
+            "email": "leifer33@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "leifermendez\\stripe\\": "src/"
+        }
+    }
+}
