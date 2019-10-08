@@ -4,7 +4,7 @@ namespace leifermendez\stripe;
 
 use Illuminate\Support\Facades\Facade;
 
-class StripeLaravel extends Facade
+class StripeLaravelFacade extends Facade
 {
     /**
      * @return string
