@@ -2,12 +2,14 @@
 
 include __DIR__ . "/../vendor/autoload.php";
 
-use leifermendez\stripe\Stripe;
+use leifermendez\stripe\StripeSCA;
 
-$stripe = new Stripe(
-    'pk_test_mUJpYCgBgLwfXMh2bnIwDqzE00Ziajrgxh',
-    'sk_test_SNt0OVFRj3XV4ACe63Qu3DLE000FSv3nqP',
-    'sandbox');
+$credentials = array(
+    'pk' => 'pk_test_mUJpYCgBgLwfXMh2bnIwDqzE00Ziajrgxh',
+    'sk' => 'sk_test_SNt0OVFRj3XV4ACe63Qu3DLE000FSv3nqP',
+    'mode' => 'sandbox'
+);
+$stripe = new StripeSCA($credentials);
 
 $charge = array(
     'amount' => floatval(1900),

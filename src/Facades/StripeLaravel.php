@@ -11,6 +11,6 @@ class StripeLaravel extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'StripeLaravel';
+        return 'StripeSCA';
     }
 }

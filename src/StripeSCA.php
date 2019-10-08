@@ -5,7 +5,7 @@ namespace leifermendez\stripe;
 use leifermendez\stripe\Helpers;
 use leifermendez\stripe\Curl;
 
-class Stripe
+class StripeSCA
 {
     private $response;
     private $mode = 'sandbox';
@@ -16,12 +16,13 @@ class Stripe
     private $sk;
 
 
-    public function __construct($pk, $sk, $mode)
+    public function __construct($data)
     {
         $this->response = new Helpers;
         $this->curl = (new Curl());
-        $this->pk = $pk;
-        $this->sk = $sk;
+        $this->pk = $data['pk'];
+        $this->sk = $data['sk'];
+        $this->mode = $data['mode'];
         $this->auth_bearer = 'Authorization: Bearer ' . $this->sk;
 
     }

@@ -6,8 +6,8 @@ use Illuminate\Support\ServiceProvider;
 class StripeProvider extends ServiceProvider {
     public function register()
     {
-        $this->app->singleton('Stripe', function () {
-            return new Stripe();
+        $this->app->singleton('StripeSCA', function () {
+            return new StripeSCA();
         }
         );
     }
@@ -16,6 +16,6 @@ class StripeProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return array('Stripe');
+        return array('StripeSCA');
     }
 }

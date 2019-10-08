@@ -2,7 +2,7 @@
 
 namespace leifermendez\stripe;
 
-use leifermendez\stripe\Stripe;
+use leifermendez\stripe\StripeSCA;
 
 class StripeService
 {
@@ -10,10 +10,7 @@ class StripeService
      */
     public function to($crendential)
     {
-        $builder = new Stripe(
-            $crendential['pk'],
-            $crendential['sk']
-        );
+        $builder = new StripeSCA($crendential);
 
         return $builder;
     }
