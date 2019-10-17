@@ -2,8 +2,8 @@
 
 namespace leifermendez\stripe;
 
-use leifermendez\stripe\Helpers;
 use leifermendez\stripe\Curl;
+use leifermendez\stripe\Helpers;
 
 class StripeSCA
 {
@@ -58,11 +58,38 @@ class StripeSCA
     {
         try {
             $save_card = array();
-            $response = $this->curl->post(
-                $this->endpoint . '/v1/customers',
-                $data,
-                [$this->auth_bearer]
+            $userExists = array(
+                'id' => null,
+                'source' => null
             );
+
+            $dataUserExists = $this->getCardByUser(
+                ['email' => 'leifer33@gmail.com']
+            );
+
+            $dataUserExists = json_decode($dataUserExists, 1);
+            if ($dataUserExists['data'] && count($dataUserExists['data']['data'])) {
+                $userExists = $dataUserExists['data']['data'];
+                $userExists = array(
+                    'id' => $userExists[0]['id'],
+                    'source' => $userExists[0]['default_source']
+                );
+            }
+
+            if (!$userExists['id']) {
+                $response = $this->curl->post(
+                    $this->endpoint . '/v1/customers',
+                    $data,
+                    [$this->auth_bearer]
+                );
+            } else {
+                $response = $this->curl->get(
+                    $this->endpoint . '/v1/customers/' . $userExists['id'],
+                    $data,
+                    [$this->auth_bearer]
+                );
+            }
+
 
             $res = json_decode($response['content'], true);
 
@@ -86,6 +113,7 @@ class StripeSCA
                 $data,
                 [$this->auth_bearer]
             );
+
 
             $response = $this->response->json(
                 json_decode($response['content'], true),
@@ -229,6 +257,54 @@ class StripeSCA
         } catch (\Exception $e) {
             $response = $this->response->json_error(null, $e->getMessage());
             return $response;
+        }
+    }
+
+    public function getCard($data)
+    {
+        try {
+            $response = $this->curl->get(
+                $this->endpoint . '/v1/customers/' . $data['customer'] . '/sources/' . $data['card'],
+                [],
+                [$this->auth_bearer]
+            );
+
+
+            if ($response['errno']) {
+                throw new \Exception($response['errmsg']);
+            }
+            $response = $this->response->json(
+                json_decode($response['content'], true),
+                '', $response['http_code']);
+
+            return $response;
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function getCardByUser($data)
+    {
+        try {
+            $response = $this->curl->get(
+                $this->endpoint . '/v1/customers',
+                ['email' => $data['email']],
+                [$this->auth_bearer]
+            );
+
+
+            if ($response['errno']) {
+                throw new \Exception($response['errmsg']);
+            }
+            $response = $this->response->json(
+                json_decode($response['content'], true),
+                '', $response['http_code']);
+
+            return $response;
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
     }
 }

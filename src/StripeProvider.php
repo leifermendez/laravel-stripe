@@ -7,7 +7,12 @@ class StripeProvider extends ServiceProvider {
     public function register()
     {
         $this->app->singleton('StripeSCA', function () {
-            return new StripeSCA();
+            $credentials = array(
+                'pk' => env('STRIPE_PK'),
+                'sk' => env('STRIPE_SK'),
+                'mode' => env('STRIPE_MODE'),
+            );
+            return new StripeSCA($credentials);
         }
         );
     }
