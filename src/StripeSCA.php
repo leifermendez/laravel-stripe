@@ -64,7 +64,7 @@ class StripeSCA
             );
 
             $dataUserExists = $this->getCardByUser(
-                ['email' => 'leifer33@gmail.com']
+                ['email' => $data['email']]
             );
 
             $dataUserExists = json_decode($dataUserExists, 1);
@@ -83,7 +83,8 @@ class StripeSCA
                     [$this->auth_bearer]
                 );
             } else {
-                $response = $this->curl->get(
+
+                $response = $this->curl->post(
                     $this->endpoint . '/v1/customers/' . $userExists['id'],
                     $data,
                     [$this->auth_bearer]
@@ -243,6 +244,28 @@ class StripeSCA
         try {
 
             $response = $this->curl->post(
+                $this->endpoint . '/v1/payment_methods',
+                $data,
+                [$this->auth_bearer]
+            );
+
+            $response = $this->response->json(
+                json_decode($response['content'], true),
+                '', $response['http_code']);
+
+            return $response;
+
+        } catch (\Exception $e) {
+            $response = $this->response->json_error(null, $e->getMessage());
+            return $response;
+        }
+    }
+
+    public function getPaymentMethod($data)
+    {
+        try {
+
+            $response = $this->curl->get(
                 $this->endpoint . '/v1/payment_methods',
                 $data,
                 [$this->auth_bearer]
