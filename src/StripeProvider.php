@@ -1,9 +1,13 @@
 <?php
+
 namespace leifermendez\stripe;
 
 use Illuminate\Support\ServiceProvider;
 
-class StripeProvider extends ServiceProvider {
+class StripeProvider extends ServiceProvider
+{
+    protected $defer = true;
+
     public function register()
     {
         $this->app->singleton('StripeSCA', function () {
@@ -16,6 +20,7 @@ class StripeProvider extends ServiceProvider {
         }
         );
     }
+
     /**
      * @return array
      */

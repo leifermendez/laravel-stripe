@@ -15,7 +15,7 @@ class Curl
 
                 CURLOPT_CUSTOMREQUEST => $method,        //set request type post or get
                 CURLOPT_POST => ($method === 'POST') ? true : false,        //set to GET
-                CURLOPT_POSTFIELDS => http_build_query($data),        //set to GET
+                CURLOPT_POSTFIELDS => ($method === 'POST') ? http_build_query($data) : false,        //set to GET
                 CURLOPT_HTTPHEADER => $headers,
                 CURLOPT_USERAGENT => $user_agent, //set user agent
                 CURLOPT_RETURNTRANSFER => true,     // return web page
@@ -28,7 +28,6 @@ class Curl
                 CURLOPT_CONNECTTIMEOUT => 120,      // timeout on connect
                 CURLOPT_TIMEOUT => 120,      // timeout on response
                 CURLOPT_MAXREDIRS => 10,       // stop after 10 redirects
-                //CURLOPT_USERPWD => $auth[0] . ":" . $auth[1]
             );
 
             $ch = curl_init($url);
