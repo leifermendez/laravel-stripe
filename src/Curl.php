@@ -15,7 +15,7 @@ class Curl
 
                 CURLOPT_CUSTOMREQUEST => $method,        //set request type post or get
                 CURLOPT_POST => ($method === 'POST') ? true : false,        //set to GET
-                CURLOPT_POSTFIELDS => ($method === 'POST') ? http_build_query($data) : false,        //set to GET
+                CURLOPT_POSTFIELDS => http_build_query($data),        //set to GET
                 CURLOPT_HTTPHEADER => $headers,
                 CURLOPT_USERAGENT => $user_agent, //set user agent
                 CURLOPT_RETURNTRANSFER => true,     // return web page
