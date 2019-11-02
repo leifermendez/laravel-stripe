@@ -38,10 +38,21 @@ Add the facade to your `config/app.php` file:
 
 #### Uso
 
+> Recuerda colocar tus credenciales en tu archivo .env
+>, Mode: "sandbox" or "live"
+
+```
+# STRIPE
+
+STRIPE_PK=pk_test_xxxxxxxxxxxx
+STRIPE_SK=sk_test_xxxxxxxxxxx
+STRIPE_MODE=sandbox
+```
+
 ---
 ##### (1) Obtener Token de Tarjeta
 
-En algunos casos es necesario obtener el token de tarjeta via 
+En algunos casos es necesario obtener el token de tarjeta vía 
 API (no recomendado), se recomienda usar [StripeJS](https://stripe.com/docs/stripe-js/reference)
 
 ```php
@@ -83,19 +94,17 @@ dd($response);
 ```
 ---
 
-##### Crear Pago
+##### (3) Crear Pago
 
-__NOTA__: Con la implementación del SCA, los pagos deben realizarse bajo una ["Intención de Pago"](https://stripe.com/docs/api/payment_intents/create)
-. Lo que tecnicamente realizamos es una peticíon para realizar un pago y Stripe se encarga de verificar si
-la tarjeta requiere o no requiere una verificacion en dos pasos.
+__NOTA:__ Con la implementación del SCA, los pagos deben realizarse bajo una ["Intención de Pago"](https://stripe.com/docs/api/payment_intents).
+ Lo que técnicamente realizamos es una petición para realizar un pago y Stripe se encarga de verificar si la tarjeta requiere o no requiere una verificación en dos pasos.
 
 __Comportamiento:__
-Puden pasar dos cosas:
-- (1) No require doble verificacion y el pago se realiza correctamente.
+Pueden pasar dos cosas:
+- (1) No requiere doble verificación y el pago se realiza correctamente.
 - (2) Requiere doble verificación :
-    - El "status" de la respuesta determinara la acción que se debe tomar [Ver más status](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-status)
-    . El status más frecuente en este caso es `requires_action` esta accion solo se puede realizar
-    a travez del StripeJS
+    - El "status" de la respuesta determinara la acción que se debe tomar [Ver más status](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-status). El status más frecuente en este caso es 'requires_action' esta acción solo se puede realizar
+      a través del StripeJS
 
 ```php
 
