@@ -103,7 +103,7 @@ __Comportamiento:__
 Pueden pasar dos cosas:
 - (1) No requiere doble verificación y el pago se realiza correctamente.
 - (2) Requiere doble verificación :
-    - El "status" de la respuesta determinara la acción que se debe tomar [Ver más status](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-status). El status más frecuente en este caso es 'requires_action' esta acción solo se puede realizar
+    - El "status" de la respuesta determinara la acción que se debe tomar [Ver más status](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-status). El status más frecuente en este caso es `requires_action` esta acción solo se puede realizar
       a través del StripeJS
 
 ```php
@@ -116,7 +116,7 @@ $charge = array(
     'amount' => floatval($amount * 100),
     'currency' => 'EUR',
     'payment_method_types' => ['card'],
-    'customer' => cus_G0amE3Dmn4p1f0, // <--- ID Customer
+    'customer' => cus_G0amE3Dmn4p1f0, // <--- ID Customer Paso (2)
     'setup_future_usage' => 'off_session'
 );
 
