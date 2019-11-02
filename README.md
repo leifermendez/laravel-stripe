@@ -50,7 +50,7 @@ STRIPE_MODE=sandbox
 ```
 
 ---
-##### (1) Obtener Token de Tarjeta
+#### (1) Obtener Token de Tarjeta
 
 En algunos casos es necesario obtener el token de tarjeta vía 
 API (no recomendado), se recomienda usar [StripeJS](https://stripe.com/docs/stripe-js/reference)
@@ -74,7 +74,7 @@ dd($card);
 
 ```
 ---
-##### (2) Guardar Cliente
+#### (2) Guardar Cliente
 
 Si queremos guardar nuestros clientes para consultar posteriormente.
 
@@ -94,7 +94,7 @@ dd($response);
 ```
 ---
 
-##### (3) Crear Pago
+#### (3) Crear Pago
 
 __NOTA:__ Con la implementación del SCA, los pagos deben realizarse bajo una ["Intención de Pago"](https://stripe.com/docs/api/payment_intents).
  Lo que técnicamente realizamos es una petición para realizar un pago y Stripe se encarga de verificar si la tarjeta requiere o no requiere una verificación en dos pasos.
