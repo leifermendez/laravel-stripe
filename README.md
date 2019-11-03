@@ -1,4 +1,4 @@
-# Larave Stripe SCA
+# Laravel Stripe SCA
 
 A continuación mostraremos como realizar un cargo en Stripe con el protocolo SCA. El siguiente paquete nos permite registrar usuarios, guardar tarjetas para pagos posteriores, crear intenciones de pago.
 
@@ -117,12 +117,45 @@ $charge = array(
     'currency' => 'EUR',
     'payment_method_types' => ['card'],
     'customer' => cus_G0amE3Dmn4p1f0, // <--- ID Customer Paso (2)
-    'setup_future_usage' => 'off_session'
+    'setup_future_usage' => 'off_session' // <--- Off Session
 );
 
 $response = StripeLaravelFacade::charge_sca($charge);
 
 dd($response);
 
+```
+
+---
+#### (3.1) Crear Pago No Capturado
+
+__NOTA:__ (No capturados), son aquellos pagos que necesitamos retener o bloquear, para posteriormente
+usar o no usar.
+Ejemplo: Si tienes un hotel y deseas cobrar 100EUR de garantía o fianza, puedes usar esta opción ya que el sistema
+bloquea este monto en la tarjeta del cliente por 7 días.
+El dinero solo estará disponible para capturar (cobrar) en los siguiente 7 días de lo contrario si no realizas ninguna captura
+Stripe libera el monto al cliente.
+
+
+```php
+
+$amount = 134;
+
+$charge = array(
+    'description' => 'Cobro de fianza' ,
+    'amount' => floatval($amount * 100),
+    'currency' => 'EUR',
+    'payment_method_types' => ['card'],
+    'off_session' => 'true',
+    'confirm' => 'true',
+    'capture_method' => 'manual', // <--- Indicamos que es un pago No Capturado
+    'source' => 'card_1FX8TaHBaMrHjOH4MeiQmvPC', // <---  ID Source Customer Paso (2)
+    'customer' => 'cus_G0amE3Dmn4p1f0'  // <--- ID Customer Paso (2)
+
+);
+
+$response = StripeLaravelFacade::charge_sca($charge);
+
+dd($response);
 
 ```
