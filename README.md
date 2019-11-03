@@ -94,7 +94,7 @@ dd($response);
 
 ```
 
-![PDF](https://github.com/leifermendez/laravel-policia-hotel/blob/master/example/documentation/vista_previa.png?raw=true)
+![Cliente](https://github.com/leifermendez/laravel-stripe/blob/master/resources/preview_2.png?raw=true)
 ---
 
 #### (3) Crear Pago
@@ -129,7 +129,7 @@ dd($response);
 
 ```
 
-![PDF](https://github.com/leifermendez/laravel-policia-hotel/blob/master/example/documentation/vista_previa.png?raw=true)
+![Pago](https://github.com/leifermendez/laravel-stripe/blob/master/resources/preview_3.png?raw=true)
 
 ---
 #### (3.1) Crear Pago No Capturado
@@ -165,5 +165,5 @@ dd($response);
 
 ```
 
-![PDF](https://github.com/leifermendez/laravel-policia-hotel/blob/master/example/documentation/vista_previa.png?raw=true)
+![No_capturado](https://github.com/leifermendez/laravel-stripe/blob/master/resources/preview_4.png?raw=true)
 ---
