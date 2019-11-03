@@ -55,6 +55,7 @@ STRIPE_MODE=sandbox
 En algunos casos es necesario obtener el token de tarjeta vía 
 API (no recomendado), se recomienda usar [StripeJS](https://stripe.com/docs/stripe-js/reference)
 
+StripeJS [Demo Live](https://codepen.io/leifermendez/pen/GRRyLBg)
 ```php
 //Test card: https://stripe.com/docs/testing#cards
 
@@ -92,6 +93,8 @@ $user = json_decode($user, true);
 dd($response);
 
 ```
+
+![PDF](https://github.com/leifermendez/laravel-policia-hotel/blob/master/example/documentation/vista_previa.png?raw=true)
 ---
 
 #### (3) Crear Pago
@@ -126,6 +129,8 @@ dd($response);
 
 ```
 
+![PDF](https://github.com/leifermendez/laravel-policia-hotel/blob/master/example/documentation/vista_previa.png?raw=true)
+
 ---
 #### (3.1) Crear Pago No Capturado
 
@@ -159,3 +164,6 @@ $response = StripeLaravelFacade::charge_sca($charge);
 dd($response);
 
 ```
+
+![PDF](https://github.com/leifermendez/laravel-policia-hotel/blob/master/example/documentation/vista_previa.png?raw=true)
+---
